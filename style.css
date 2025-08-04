@@ -1,0 +1,724 @@
+/* --- General & Theme --- */
+:root {
+    --primary-glow: #FFD700; /* Gold */
+    --secondary-glow: #00FFFF; /* Cyan */
+    --background-dark-start: #1a1a1a;
+    --background-dark-end: #0f0f0f;
+    --surface-dark: #1f1f1f;
+    --text-primary: #f0f0f0;
+    --text-secondary: #a0a0a0;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    font-family: 'Tajawal', sans-serif;
+    background: linear-gradient(135deg, var(--background-dark-start), var(--background-dark-end));
+    color: var(--text-primary);
+    transition: all 0.3s ease;
+}
+
+/* --- Language Direction Control --- */
+body.ltr {
+    direction: ltr;
+    text-align: left;
+}
+
+body:not(.ltr) {
+    direction: rtl;
+    text-align: right;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* --- Language Element Visibility --- */
+.lang-en,
+body.ltr .lang-ar {
+    display: none;
+}
+
+.lang-ar,
+body.ltr .lang-en {
+    display: inline-block;
+}
+
+/* --- Navbar --- */
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: rgba(15, 15, 15, 0.8);
+    backdrop-filter: blur(10px);
+    z-index: 1000;
+    box-shadow: 0 2px 15px rgba(0, 255, 255, 0.1);
+    padding: 10px 0;
+}
+
+.nav-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--primary-glow);
+    cursor: default;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 30px;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-links a {
+    color: var(--text-primary);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1rem;
+    position: relative;
+    transition: color 0.3s ease;
+}
+
+.nav-links a:hover {
+    color: var(--primary-glow);
+}
+
+.nav-links a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -5px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: var(--secondary-glow);
+    transition: width 0.3s ease;
+}
+
+.nav-links a:hover::after {
+    width: 100%;
+}
+
+.lang-toggle {
+    background: var(--primary-glow);
+    color: var(--background-dark-end);
+    border: none;
+    font-weight: 700;
+    padding: 8px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.lang-toggle:hover {
+    background-color: var(--secondary-glow);
+    box-shadow: 0 0 10px var(--secondary-glow);
+}
+
+/* --- Header --- */
+.header {
+    position: relative;
+    padding: 140px 20px 80px 20px;
+    text-align: center;
+    background-image: url('pro.jpeg.png?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1');
+    background-size: cover;
+    background-position: center;
+    z-index: 1;
+}
+
+.header-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: -1;
+}
+
+.profile-image {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    border: 4px solid var(--primary-glow);
+    box-shadow: 0 0 25px rgba(255, 215, 0, 0.5);
+    margin: 0 auto 20px auto;
+    overflow: hidden;
+}
+
+.profile-pic {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.name {
+    font-family: 'Playfair Display', serif;
+    font-size: 3rem;
+    color: var(--primary-glow);
+    margin: 10px 0;
+    text-shadow: 0 0 10px black;
+}
+
+.title {
+    font-size: 1.4rem;
+    color: var(--secondary-glow);
+    margin: 5px 0 20px 0;
+    font-weight: 400;
+    text-shadow: 0 0 5px black;
+}
+
+.bio {
+    max-width: 700px;
+    margin: 0 auto 30px auto;
+    line-height: 1.7;
+    color: var(--text-primary);
+    text-shadow: 0 0 5px black;
+}
+
+.open-cv-modal-btn,
+.download-cv-btn {
+    background: var(--primary-glow);
+    color: var(--background-dark-end);
+    border: none;
+    padding: 12px 30px;
+    font-size: 1.1rem;
+    font-weight: 700;
+    border-radius: 30px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    transition: all 0.3s ease;
+}
+
+.open-cv-modal-btn:hover,
+.download-cv-btn:hover {
+    background-color: var(--secondary-glow);
+    color: #000;
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0, 255, 255, 0.3);
+}
+
+/* --- General Section Styling --- */
+section {
+    padding: 0px 20px;
+    border-top: 1px solid rgba(0, 255, 255, 0.1);
+}
+
+.section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.5rem;
+    color: var(--primary-glow);
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+/* --- Experience & Skills (Main Page) --- */
+.experience-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+    gap: 30px;
+}
+
+.experience-card {
+    background-color: var(--surface-dark);
+    border-radius: 15px;
+    padding: 30px;
+    border: 1px solid transparent;
+    transition: all 0.3s ease;
+}
+
+.experience-card:hover {
+    transform: translateY(-10px);
+    border-color: rgba(0, 255, 255, 0.3);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.experience-card h3 {
+    color: var(--primary-glow);
+    margin-top: 0;
+    font-size: 1.4rem;
+}
+
+.company {
+    color: var(--secondary-glow);
+    font-weight: 600;
+}
+
+.duration {
+    font-style: italic;
+    color: var(--text-secondary);
+    margin-bottom: 15px;
+    font-size: 0.9rem;
+}
+
+.skills-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.skill-category {
+    background-color: var(--surface-dark);
+    border-radius: 15px;
+    padding: 30px;
+}
+
+.skill-category h3 {
+    color: var(--primary-glow);
+    margin-top: 0;
+}
+
+.skill-category ul {
+    list-style: none;
+    padding: 0;
+}
+
+.skill-category li {
+    padding: 8px 0;
+    color: var(--text-secondary);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.skill-category li::before {
+    content: "◇";
+    color: var(--secondary-glow);
+    margin-inline-end: 10px;
+}
+
+/* --- Gallery & Chart (Main Page) --- */
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+.gallery-item {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.gallery-item:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 20px rgba(255, 215, 0, 0.4);
+}
+
+.chart-container {
+    max-width: 450px;
+    margin: 40px auto 0 auto;
+}
+
+/* --- Contact (Main Page) --- */
+.contact-info {
+    text-align: center;
+}
+
+.contact-details {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 20px 40px;
+    margin-top: 20px;
+    font-size: 1.1rem;
+}
+
+.contact-item {
+    display: inline-flex;
+    align-items: center;
+}
+
+.contact-item a,
+.contact-item span {
+    color: var(--text-primary);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.contact-item a:hover {
+    color: var(--primary-glow);
+}
+
+.contact-item i {
+    color: var(--secondary-glow);
+    margin-inline-end: 10px;
+}
+
+.address {
+    width: 100%;
+    margin-top: 20px;
+    color: var(--text-secondary);
+}
+
+/* --- Lightbox for Gallery --- */
+.lightbox {
+    display: none;
+    position: fixed;
+    z-index: 2000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.9);
+    justify-content: center;
+    align-items: center;
+    animation: fadeIn 0.3s;
+}
+
+.lightbox-content {
+    max-width: 85%;
+    max-height: 85%;
+    border-radius: 10px;
+    animation: zoomIn 0.3s;
+}
+
+.close-lightbox {
+    position: absolute;
+    top: 20px;
+    right: 35px;
+    color: var(--primary-glow);
+    font-size: 40px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.close-lightbox:hover {
+    transform: rotate(90deg);
+}
+
+/* --- CV MODAL (for preview) --- */
+.modal-overlay {
+    display: none;
+    position: fixed;
+    z-index: 3000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    justify-content: center;
+    align-items: center;
+    animation: fadeIn 0.3s;
+}
+
+.modal-content {
+    background: var(--surface-dark);
+    padding: 20px;
+    border-radius: 15px;
+    width: 90%;
+    max-width: 850px;
+    max-height: 90vh;
+    overflow-y: auto;
+    position: relative;
+    animation: zoomIn 0.3s;
+}
+
+.close-modal {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    background: none;
+    border: none;
+    font-size: 2rem;
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.close-modal:hover {
+    color: var(--primary-glow);
+}
+
+.modal-actions {
+    text-align: center;
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes zoomIn {
+    from {
+        transform: scale(0.8);
+    }
+    to {
+        transform: scale(1);
+    }
+}
+
+/*
+ * ===============================================
+ * A4 CV PAGE STYLING (inside modal) - UPDATED
+ * ===============================================
+ */
+.cv-page {
+    background: white;
+    color: #222; /* Changed for better visibility */
+    font-size: 11pt;
+    line-height: 1.4;
+    padding: 20mm;
+    width: 210mm;
+    min-height: 297mm;
+    box-sizing: border-box;
+}
+
+.cv-page span {
+    color: #222 !important; /* Force color for all spans inside CV */
+}
+
+body.ltr .cv-page {
+    text-align: left;
+    direction: ltr;
+    font-family: 'Georgia', 'Times New Roman', serif;
+}
+
+body:not(.ltr) .cv-page {
+    text-align: right;
+    direction: rtl;
+    font-family: 'Arial', sans-serif;
+}
+
+.cv-page a {
+    color: #0056b3;
+    text-decoration: none;
+}
+
+.cv-page a:hover {
+    text-decoration: underline;
+}
+
+.cv-header {
+    text-align: center;
+    border-bottom: 2px solid #333;
+    padding-bottom: 10px;
+    margin-bottom: 8mm; /* Reduced margin */
+}
+
+.cv-header h1 {
+    margin: 0;
+    font-size: 22pt;
+    color: #000;
+    font-family: 'Playfair Display', serif;
+}
+
+.cv-header p {
+    margin: 5px 0;
+    font-size: 12pt;
+    color: #444;
+}
+
+.cv-contact {
+    font-size: 9pt;
+    color: #555;
+}
+
+.cv-contact span {
+    margin: 0 5px;
+}
+
+.cv-section {
+    margin-bottom: 8mm; /* Reduced margin */
+}
+
+.cv-section-title {
+    font-size: 14pt;
+    color: #111;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 5px;
+    margin-bottom: 4mm; /* Reduced margin */
+    font-weight: bold;
+}
+
+.cv-summary {
+    font-style: italic;
+}
+
+.cv-experience-item {
+    margin-bottom: 4mm; /* Reduced margin */
+}
+
+.cv-experience-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 2px;
+}
+
+.cv-job-title {
+    font-size: 12pt;
+    font-weight: bold;
+    color: #000;
+}
+
+.cv-job-duration {
+    font-size: 10pt;
+    font-style: italic;
+    color: #555;
+    white-space: nowrap;
+}
+
+.cv-company-location {
+    font-size: 11pt;
+    color: #333;
+    font-weight: bold;
+}
+
+.cv-skills-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    columns: 2;
+    -webkit-columns: 2;
+    -moz-columns: 2;
+}
+
+.cv-skills-list li {
+    margin-bottom: 3px;
+    font-size: 12pt;
+    color: #222;
+}
+
+.cv-skills-list li::before {
+    content: '•';
+    margin-inline-end: 8px;
+    color: #333;
+}
+
+/* --- Print Control Rules --- */
+.cv-section-title,
+.cv-header {
+    page-break-after: avoid;
+}
+.cv-experience-item,
+.cv-skills-list li {
+    page-break-inside: avoid;
+}
+
+.cv-experience-item {
+    line-height: 1.5;
+}
+
+
+/*
+ * ===============================================
+ * STYLING FOR WORK EXPERIENCE SECTION
+ * ===============================================
+ */
+
+/* The main container for the section */
+.experience {
+    padding: 80px 20px;
+    border-top: 1px solid rgba(0, 255, 255, 0.1); /* Glowing separator line */
+}
+
+/* The grid container for all the experience cards */
+.experience-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+    gap: 30px;
+}
+
+/* Styling for each individual card */
+.experience-card {
+    background-color: var(--surface-dark, #1f1f1f); /* Dark surface color */
+    border-radius: 15px;
+    padding: 30px;
+    border: 1px solid transparent;
+    transition: all 0.3s ease;
+}
+
+/* Hover effect to make the card lift and glow */
+.experience-card:hover {
+    transform: translateY(-10px);
+    border-color: rgba(0, 255, 255, 0.3);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+/* Job Title (e.g., "Indian Specialist Chef") */
+.experience-card h3 {
+    color: var(--primary-glow, #FFD700); /* Gold color */
+    margin-top: 0;
+    font-size: 1.4rem;
+}
+
+/* Company Name (e.g., "Crowne Plaza Hotel") */
+.experience-card .company {
+    color: var(--secondary-glow, #00FFFF); /* Cyan color */
+    font-weight: 600;
+    margin: 5px 0 10px 0;
+}
+
+/* Duration (e.g., "2022 - Present") */
+.experience-card .duration {
+    font-style: italic;
+    color: var(--text-secondary, #a0a0a0); /* Light grey text */
+    margin-bottom: 20px;
+    font-size: 0.9rem;
+}
+
+/* Achievement paragraph */
+.experience-card .achievement {
+    margin-bottom: 8px;
+    font-weight: 600; /* Bolding the "Achievement:" label */
+}
+
+/* Result paragraph with a highlighted background */
+.experience-card .result {
+    background-color: rgba(0, 255, 255, 0.05); /* Faint cyan background */
+    border-left: 4px solid var(--secondary-glow, #00FFFF); /* Cyan accent line */
+    padding: 10px 15px;
+    border-radius: 5px;
+    color: #aaffff; /* Lighter cyan text for emphasis */
+    font-size: 0.95rem;
+    margin-top: 15px;
+}
+
+/* Adjusts the accent line for LTR languages */
+body.ltr .experience-card .result {
+    border-left: none;
+    border-right: 4px solid var(--secondary-glow, #00FFFF);
+}
+/* Removed page-break-before: always; to prevent first blank page */
+
+/* --- Responsive --- */
+@media (max-width: 768px) {
+    .nav-links {
+        display: none;
+    }
+    .skills-content {
+        grid-template-columns: 1fr;
+    }
+    .contact-details {
+        flex-direction: column;
+        gap: 20px;
+    }
+}
