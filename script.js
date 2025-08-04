@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', function() {
     let achievementsChartInstance;
     let slideshowInterval = null; // متغير لتخزين المؤقت الزمني ومنع تكراره
 
-    // --- Language Switcher ---
+    // --- Language Switcher (النسخة المُعدّلة) ---
     function switchLanguage() {
         const isArabic = htmlEl.lang === 'ar';
 
@@ -14,16 +14,19 @@ document.addEventListener('DOMContentLoaded', function() {
         document.body.classList.toggle('ltr', isArabic);
         langToggleBtn.textContent = isArabic ? 'AR' : 'EN';
         
+        // 1. تدمير وإعادة رسم المخطط البياني (كما كان)
         if (achievementsChartInstance) {
             achievementsChartInstance.destroy();
         }
         drawAchievementsChart();
+
+        // 2. ⭐ إعادة تشغيل معرض الصور (الإضافة الجديدة والمهمة)
+        startGallerySlideshow(); 
     }
 
     if (langToggleBtn) {
         langToggleBtn.addEventListener('click', switchLanguage);
     }
-
     // --- Automatic Slideshow Gallery Logic ---
     function startGallerySlideshow() {
         const slides = document.querySelectorAll('.gallery-slide');
@@ -150,3 +153,4 @@ document.addEventListener('DOMContentLoaded', function() {
     drawAchievementsChart();
     startGallerySlideshow(); // يتم استدعاؤها مرة واحدة فقط عند تحميل الصفحة
 });
+
