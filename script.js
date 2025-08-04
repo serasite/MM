@@ -17,10 +17,30 @@ document.addEventListener('DOMContentLoaded', function() {
             achievementsChartInstance.destroy();
         }
         drawAchievementsChart();
+        startGallerySlideshow();
     }
 
     if (langToggleBtn) {
         langToggleBtn.addEventListener('click', switchLanguage);
+    }
+
+    // --- Automatic Slideshow Gallery Logic ---
+    function startGallerySlideshow() {
+        const slides = document.querySelectorAll('.gallery-slide');
+        if (slides.length === 0) return;
+    
+        let currentSlide = 0;
+    
+        setInterval(() => {
+            // إخفاء الشريحة الحالية
+            slides[currentSlide].classList.remove('active');
+    
+            // الانتقال إلى الشريحة التالية (مع العودة للبداية بعد الوصول للنهاية)
+            currentSlide = (currentSlide + 1) % slides.length;
+    
+            // إظهار الشريحة الجديدة
+            slides[currentSlide].classList.add('active');
+        }, 4000); // تغيير الصورة كل 4 ثوانٍ (4000 ميلي ثانية)
     }
 
     // --- Achievements Chart (Doughnut) ---
@@ -153,3 +173,4 @@ document.addEventListener('DOMContentLoaded', function() {
     document.body.classList.remove('ltr');
     drawAchievementsChart();
 });
+
