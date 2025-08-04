@@ -354,7 +354,7 @@ section {
 /* تعديل للresponsive على الشاشات الصغيرة */
 @media (max-width: 768px) {
     .slideshow-container {
-        height: 400px;
+        height: 650px;
     }
 }
 .chart-container {
@@ -756,6 +756,7 @@ body.ltr .experience-card .result {
     }
 
 }
+
 
 
 
