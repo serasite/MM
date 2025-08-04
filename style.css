@@ -323,6 +323,40 @@ section {
     transform: scale(1.05);
     box-shadow: 0 0 20px rgba(255, 215, 0, 0.4);
 }
+/* --- Automatic Slideshow Gallery --- */
+.slideshow-container {
+    position: relative;
+    width: 100%;
+    max-width: 900px; /* يمكنك تعديل العرض الأقصى حسب رغبتك */
+    height: 600px; /* ارتفاع ثابت للحاوية لضمان ثبات التصميم */
+    margin: 0 auto;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    border: 2px solid var(--secondary-glow);
+}
+
+.gallery-slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* تضمن أن الصورة تملأ الحاوية دون تشويه */
+    opacity: 0;
+    transition: opacity 1s ease-in-out; /* هذا هو سر تأثير التلاشي الناعم */
+}
+
+.gallery-slide.active {
+    opacity: 1; /* يجعل الصورة النشطة مرئية */
+}
+
+/* تعديل للresponsive على الشاشات الصغيرة */
+@media (max-width: 768px) {
+    .slideshow-container {
+        height: 400px; /* تقليل الارتفاع على الجوال */
+    }
+}
 
 .chart-container {
     max-width: 450px;
@@ -721,4 +755,5 @@ body.ltr .experience-card .result {
         flex-direction: column;
         gap: 20px;
     }
+
 }
