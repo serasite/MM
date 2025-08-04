@@ -327,8 +327,8 @@ section {
 .slideshow-container {
     position: relative;
     width: 100%;
-    max-width: 900px; /* يمكنك تعديل العرض الأقصى حسب رغبتك */
-    height: 600px; /* ارتفاع ثابت للحاوية لضمان ثبات التصميم */
+    max-width: 900px;
+    height: 600px;
     margin: 0 auto;
     border-radius: 15px;
     overflow: hidden;
@@ -342,22 +342,21 @@ section {
     left: 0;
     width: 100%;
     height: 100%;
-    object-fit: cover; /* تضمن أن الصورة تملأ الحاوية دون تشويه */
+    object-fit: cover;
     opacity: 0;
-    transition: opacity 1s ease-in-out; /* هذا هو سر تأثير التلاشي الناعم */
+    transition: opacity 1.5s ease-in-out; /* تأثير تلاشي أبطأ وأكثر نعومة */
 }
 
 .gallery-slide.active {
-    opacity: 1; /* يجعل الصورة النشطة مرئية */
+    opacity: 1;
 }
 
 /* تعديل للresponsive على الشاشات الصغيرة */
 @media (max-width: 768px) {
     .slideshow-container {
-        height: 400px; /* تقليل الارتفاع على الجوال */
+        height: 400px;
     }
 }
-
 .chart-container {
     max-width: 450px;
     margin: 40px auto 0 auto;
@@ -757,3 +756,4 @@ body.ltr .experience-card .result {
     }
 
 }
+
