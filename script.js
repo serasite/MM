@@ -3,6 +3,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const langToggleBtn = document.getElementById('lang-toggle');
     const htmlEl = document.documentElement;
     let achievementsChartInstance;
+    let slideshowInterval = null; // متغير لتخزين المؤقت الزمني ومنع تكراره
 
     // --- Language Switcher ---
     function switchLanguage() {
@@ -17,7 +18,6 @@ document.addEventListener('DOMContentLoaded', function() {
             achievementsChartInstance.destroy();
         }
         drawAchievementsChart();
-        startGallerySlideshow();
     }
 
     if (langToggleBtn) {
@@ -28,19 +28,19 @@ document.addEventListener('DOMContentLoaded', function() {
     function startGallerySlideshow() {
         const slides = document.querySelectorAll('.gallery-slide');
         if (slides.length === 0) return;
-    
+        
+        // التأكد من عدم وجود مؤقت يعمل بالفعل
+        if (slideshowInterval) {
+            clearInterval(slideshowInterval);
+        }
+
         let currentSlide = 0;
     
-        setInterval(() => {
-            // إخفاء الشريحة الحالية
+        slideshowInterval = setInterval(() => {
             slides[currentSlide].classList.remove('active');
-    
-            // الانتقال إلى الشريحة التالية (مع العودة للبداية بعد الوصول للنهاية)
             currentSlide = (currentSlide + 1) % slides.length;
-    
-            // إظهار الشريحة الجديدة
             slides[currentSlide].classList.add('active');
-        }, 4000); // تغيير الصورة كل 4 ثوانٍ (4000 ميلي ثانية)
+        }, 4000); // تغيير الصورة كل 4 ثوانٍ
     }
 
     // --- Achievements Chart (Doughnut) ---
@@ -82,33 +82,19 @@ document.addEventListener('DOMContentLoaded', function() {
         const element = document.getElementById('cv-for-pdf');
         const isArabic = document.documentElement.lang === 'ar';
         const filename = isArabic ? 'محمود-مراد-سيرة-ذاتية.pdf' : 'Mahmoud-Mourad-CV.pdf';
-
-        // إضافة CSS مؤقت لضمان بدء المحتوى من الأعلى
+        
         const originalStyle = element.style.cssText;
         element.style.cssText += 'padding-top: 20px; margin-top: 0; transform: translateY(0);';
 
         const opt = {
-            margin:       [0, 10, 10, 10], // هامش متساوي من جميع الجهات
+            margin:       [10, 10, 10, 10],
             filename:     filename,
             image:        { type: 'jpeg', quality: 1.0 },
-            html2canvas:  { 
-                scale: 2, 
-                useCORS: true, 
-                logging: false,
-                scrollY: 0, // إعادة تعيين التمرير إلى الأعلى
-                windowHeight: element.scrollHeight // التقاط الارتفاع الكامل
-            },
-            jsPDF:        { 
-                unit: 'mm', 
-                format: 'a4', 
-                orientation: 'portrait',
-                putOnlyUsedFonts: true,
-                floatPrecision: 16
-            }
+            html2canvas:  { scale: 2, useCORS: true, logging: false, scrollY: 0, windowHeight: element.scrollHeight },
+            jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait', putOnlyUsedFonts: true, floatPrecision: 16 }
         };
 
         html2pdf().from(element).set(opt).save().then(() => {
-            // إعادة الأنماط الأصلية
             element.style.cssText = originalStyle;
         });
     }
@@ -120,31 +106,23 @@ document.addEventListener('DOMContentLoaded', function() {
     const downloadFromModalBtn = document.getElementById('download-from-modal-btn');
 
     if(cvModal && openModalBtns.length > 0 && closeModalBtn && downloadFromModalBtn) {
-        // Open modal when any "open" button is clicked
         openModalBtns.forEach(btn => {
             btn.addEventListener('click', () => {
                 cvModal.style.display = 'flex';
             });
         });
-
-        // Close modal with the close button
         closeModalBtn.addEventListener('click', () => {
             cvModal.style.display = 'none';
         });
-
-        // Close modal by clicking on the overlay background
         cvModal.addEventListener('click', (e) => {
             if (e.target === cvModal) {
                 cvModal.style.display = 'none';
             }
         });
-
-        // Trigger the actual PDF download from the button inside the modal
         downloadFromModalBtn.addEventListener('click', downloadCV);
     }
 
-
-    // --- Gallery Lightbox Logic ---
+    // --- Gallery Lightbox Logic (for static gallery) ---
     const lightbox = document.getElementById('lightbox');
     const lightboxImg = document.getElementById('lightbox-img');
     const closeLightboxBtn = document.getElementById('close-lightbox');
@@ -157,11 +135,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 lightboxImg.src = item.src;
             });
         });
-
         closeLightboxBtn.addEventListener('click', () => {
             lightbox.style.display = 'none';
         });
-
         lightbox.addEventListener('click', (e) => {
             if (e.target === lightbox) {
                 lightbox.style.display = 'none';
@@ -172,5 +148,5 @@ document.addEventListener('DOMContentLoaded', function() {
     // --- Initial Load ---
     document.body.classList.remove('ltr');
     drawAchievementsChart();
+    startGallerySlideshow(); // يتم استدعاؤها مرة واحدة فقط عند تحميل الصفحة
 });
-
