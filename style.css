@@ -323,7 +323,7 @@ section {
     transform: scale(1.05);
     box-shadow: 0 0 20px rgba(255, 215, 0, 0.4);
 }
-/* --- Automatic Slideshow Gallery --- */
+/* --- Automatic Slideshow Gallery (UPDATED) --- */
 .slideshow-container {
     position: relative;
     width: 100%;
@@ -334,17 +334,18 @@ section {
     overflow: hidden;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
     border: 2px solid var(--secondary-glow);
+    background-color: #000; /* ⭐ إضافة: خلفية سوداء لملء الفراغات */
 }
 
 .gallery-slide {
     position: absolute;
     top: 0;
     left: 0;
-    width: 500px;
-    height: 650px;
-    object-fit: cover;
+    width: 100%;  /* تعديل: اجعل العرض 100% ليتناسب مع الحاوية */
+    height: 100%; /* تعديل: اجعل الارتفاع 100% ليتناسب مع الحاوية */
+    object-fit: contain; /* ⭐ التعديل الأهم: لعرض الصورة كاملة */
     opacity: 0;
-    transition: opacity 1.5s ease-in-out; /* تأثير تلاشي أبطأ وأكثر نعومة */
+    transition: opacity 1.5s ease-in-out;
 }
 
 .gallery-slide.active {
@@ -756,6 +757,7 @@ body.ltr .experience-card .result {
     }
 
 }
+
 
 
 
