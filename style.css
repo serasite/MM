@@ -327,8 +327,8 @@ section {
 .slideshow-container {
     position: relative;
     width: 100%;
-    max-width: 900px;
-    height: 600px;
+    max-width: 500px;
+    height: 650px;
     margin: 0 auto;
     border-radius: 15px;
     overflow: hidden;
@@ -756,4 +756,5 @@ body.ltr .experience-card .result {
     }
 
 }
+
 
